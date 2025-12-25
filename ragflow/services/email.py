@@ -5,11 +5,10 @@ import hashlib
 import mimetypes
 from email.header import decode_header
 from datetime import datetime, timezone
-from field_agent_app.core.logging import logger
-from field_agent_app.core.config import settings
-from field_agent_app.services.storage import storage_processor
-from field_agent_app.models.main import ProcessorFolders
-from field_agent_app.db.repositories import PolicyRecordRepository
+from ragflow import logger
+from ragflow.services.storage import storage_processor
+from ragflow.models.main import ProcessorFolders
+from ragflow.db.repositories import PolicyRecordRepository
 
 class EmailService():
     def __init__(self, user: str, password: str):
@@ -125,5 +124,3 @@ class EmailService():
         logger.info("Uploaded File Metadata:")
         logger.info(files_metadata)
         return files_metadata
-
-email_service = EmailService(user=settings.email_username, password=settings.email_password)

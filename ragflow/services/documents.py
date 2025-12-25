@@ -1,9 +1,9 @@
 import os
 from google.cloud import bigquery
 from google.cloud.exceptions import GoogleCloudError
-from field_agent_app.core.tasks import app_clients
-from field_agent_app.core.config import settings
-from field_agent_app.core.logging import logger
+from ragflow.utils import gcp_clients
+from core.configs.ragflow import BQ_DATASET_ID, BQ_TABLE_ID
+from ragflow import logger
 
 class FileService:
     def __init__(self):
@@ -54,9 +54,9 @@ class FileService:
         write_disposition: str = "WRITE_APPEND"
     ):
         try:
-            client = app_clients.get_db_client()
-            dataset_id = settings.bq_dataset_id
-            table_id = settings.bq_table_id
+            client = gcp_clients.get_db_client()
+            dataset_id = BQ_DATASET_ID
+            table_id = BQ_TABLE_ID
 
             dataset_ref = client.dataset(dataset_id)
             table_ref = dataset_ref.table(table_id)

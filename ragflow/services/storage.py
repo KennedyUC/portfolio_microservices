@@ -1,16 +1,16 @@
 import os
 import mimetypes
 import asyncio
-from field_agent_app.core.config import settings
-from field_agent_app.core.logging import logger
-from field_agent_app.core.tasks import app_clients
+from core.configs.ragflow import GCP_STORAGE_BUCKET
+from ragflow import logger
+from ragflow.utils import gcp_clients
 from io import BytesIO
 from typing import List
 
-class StorageProcessor:
+class StorageService:
     def __init__(self):
-        self.storage_bucket = settings.gcp_storage_bucket
-        self.storage_client = app_clients.get_storage_client()
+        self.storage_bucket = GCP_STORAGE_BUCKET
+        self.storage_client = gcp_clients.get_storage_client()
 
     async def upload_document(self, storage_folder, file_name, file_content, mime_type):
         bucket = self.storage_client.bucket(self.storage_bucket)
@@ -81,5 +81,3 @@ class StorageProcessor:
             blob.upload_from_string('', content_type='application/x-www-form-urlencoded;charset=UTF-8')
         else:
             logger.info(f"Folder '{folder_path}' already exists.")
-
-storage_processor = StorageProcessor()

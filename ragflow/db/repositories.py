@@ -1,10 +1,15 @@
-from field_agent_app.db.base import BaseRepository
-from field_agent_app.core.config import settings
+from ragflow.db.base import BaseRepository
 from google.cloud import bigquery
-from field_agent_app.models.main import FileMetadataRecord
+from ragflow.models.main import FileMetadataRecord
+from core.configs.ragflow import (
+    GCP_PROJECT_ID, 
+    BQ_DATASET_ID, 
+    BQ_TABLE_ID, 
+    METADATA_TABLE_ID
+)
 
-bq_table_fqn = f"{settings.gcp_project_id}.{settings.bq_dataset_id}.{settings.bq_table_id}"
-metadata_table = f"{settings.gcp_project_id}.{settings.bq_dataset_id}.{settings.metadata_table_id}"
+bq_table_fqn = f"{GCP_PROJECT_ID}.{BQ_DATASET_ID}.{BQ_TABLE_ID}"
+metadata_table = f"{GCP_PROJECT_ID}.{BQ_DATASET_ID}.{METADATA_TABLE_ID}"
 
 GET_POLICY_BY_CUSTOMER_QUERY = f"""
     SELECT PolicyID, CustomerName, PolicyType, State, EffectiveDate, ExpirationDate, Premium, Status
