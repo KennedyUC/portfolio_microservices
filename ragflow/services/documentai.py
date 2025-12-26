@@ -1,16 +1,16 @@
 from google.cloud import documentai_v1beta3 as documentai
-from field_agent_app.core.config import settings
-from field_agent_app.core.logging import logger
-from field_agent_app.core.tasks import app_clients
+from ragflow import logger
+from core.configs.ragflow import GCP_PROJECT_ID, DOCAI_PROCESSOR_NAME, DOCAI_PROCESSOR_TYPE
+from ragflow.utils import gcp_clients
 import uuid
 
-class DocumentAIProcessor:
+class DocumentAIService:
     def __init__(self):
-        self.project_id         = settings.gcp_project_id
+        self.project_id         = GCP_PROJECT_ID
         self.location           = "us"
-        self.processor_name     = settings.docai_processor_name
-        self.processor_type     = settings.docai_processor_type
-        self.processor_client   = app_clients.get_processor_client()
+        self.processor_name     = DOCAI_PROCESSOR_NAME
+        self.processor_type     = DOCAI_PROCESSOR_TYPE
+        self.processor_client   = gcp_clients.get_docai_client()
     
     def create_doc_processor(self):
         logger.info("Creating Document AI Processor...")
@@ -56,5 +56,3 @@ class DocumentAIProcessor:
             logger.error(f"Error occurred during document processing: {e}")
             self.delete_doc_processor(processor_name=processor_name)
             return None
-        
-documentai_processor = DocumentAIProcessor()

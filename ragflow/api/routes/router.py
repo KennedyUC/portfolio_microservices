@@ -1,26 +1,29 @@
 import os
-from uuid import uuid4
-from fastapi import APIRouter, HTTPException, Depends, UploadFile, File
-from fastapi import status
-from fastapi.responses import JSONResponse
 import tempfile
 import mimetypes
-from fastapi.responses import RedirectResponse
-from field_agent_app.db.repositories import PolicyRecordRepository
+from uuid import uuid4
 from typing import List
-from field_agent_app.services.storage import storage_processor
-from field_agent_app.services.gemini import gemini_service
-from field_agent_app.services.prompts import PromptsTemplates
-from field_agent_app.services.documentai import documentai_processor
-from field_agent_app.services.rag import rag_service
-from field_agent_app.core.logging import logger
-from field_agent_app.models.main import ProcessorFolders
-from field_agent_app.models.main import DocumentProcessRequest
-from field_agent_app.models.main import ChatRequest
-from field_agent_app.models.main import FileMetadataRecord
-from field_agent_app.models.main import FileNamesRequest
-from field_agent_app.services.chat import ConversationStore
-from field_agent_app.services.email import email_service
+
+from fastapi import status
+from fastapi.responses import RedirectResponse, JSONResponse
+from fastapi import APIRouter, HTTPException, Depends, UploadFile, File
+
+from ragflow import logger
+from ragflow.db.repositories import PolicyRecordRepository
+from ragflow.models.main import (
+    ProcessorFolders,
+    DocumentProcessRequest,
+    ChatRequest,
+    FileMetadataRecord,
+    FileNamesRequest,
+)
+from ragflow.services import rag_service
+from ragflow.services import email_service
+from ragflow.services import gemini_service
+from ragflow.services.chat import ConversationStore
+from ragflow.services.prompts import PromptsTemplates
+from ragflow.services import storage_service
+from ragflow.services import documentai_service
 
 router = APIRouter()
 
@@ -41,7 +44,7 @@ async def upload_audio(audio_file: UploadFile = File(...)):
     folder = ProcessorFolders.audio
 
     try:
-        await storage_processor.upload_document(
+        await storage_service.upload_document(
             storage_folder=folder,
             file_name=file_name,
             file_content=audio_file.file,
@@ -82,7 +85,7 @@ async def upload_documents(files: List[UploadFile] = File(...)):
             file_name = f"{uuid4()}{suffix}"
 
             try:
-                await storage_processor.upload_document(
+                await storage_service.upload_document(
                     storage_folder=folder,
                     file_name=file_name,
                     file_content=file.file,
@@ -148,7 +151,7 @@ async def process_document(
             logger.info(f"Audio Files List: {audio_gcs_paths}")
             for audio_gcs_path in audio_gcs_paths:
                 audio_folder, audio_file = os.path.split(audio_gcs_path)
-                audio_file_obj = await storage_processor.download_document(audio_folder, audio_file)
+                audio_file_obj = await storage_service.download_document(audio_folder, audio_file)
                 audio_bytes = audio_file_obj.read()
 
                 if not audio_mimetype:
@@ -168,7 +171,7 @@ async def process_document(
                 mime_type = image.get("mime_type")
 
                 try:
-                    scanned_text = await documentai_processor.extract_text(
+                    scanned_text = await documentai_service.extract_text(
                         file_path=path,
                         mime_type=mime_type
                     )
@@ -186,7 +189,7 @@ async def process_document(
 
                 folder, filename = os.path.split(path)
                 logger.info(f"Downloading File: {filename} from Folder: {folder}")
-                file_obj = await storage_processor.download_document(folder, filename)
+                file_obj = await storage_service.download_document(folder, filename)
                 
                 if mime_type.startswith("audio/"):
                     audio_bytes = file_obj.read()

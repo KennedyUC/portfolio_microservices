@@ -3,29 +3,36 @@ from vertexai.generative_models import GenerativeModel, Tool, Part
 import vertexai
 from typing import Optional
 from google.oauth2 import service_account
-from field_agent_app.core.config import settings
-from field_agent_app.core.logging import logger
-from field_agent_app.models.main import AuthMode
-from field_agent_app.services.gemini import gemini_service
-from field_agent_app.services.prompts import PromptsTemplates
+from ragflow.models.main import AuthMode
+from ragflow.services.prompts import PromptsTemplates
+from ragflow import logger
+from core.configs.ragflow import (
+    AUTH_MODE, 
+    GCP_REGION, 
+    GCP_PROJECT_ID, 
+    RAG_ENGINE_NAME, 
+    RAG_MODEL_NAME, 
+    EMBEDDING_MODEL,
+    GCP_SA_JSON_PATH
+)
 
 class RAGService:
     def __init__(
         self, 
-        embedding_model: str = settings.embedding_model, 
-        rag_model: str = settings.rag_model_name
+        embedding_model: str = EMBEDDING_MODEL, 
+        rag_model: str = RAG_MODEL_NAME
     ):
         logger.info("Initializing RAG Service...")
-        self.auth_mode = settings.auth_mode
-        self.gcp_location = settings.gcp_region
-        self.project_id = settings.gcp_project_id
-        self.display_name = settings.rag_engine_name
+        self.auth_mode = AUTH_MODE
+        self.gcp_location = GCP_REGION
+        self.project_id = GCP_PROJECT_ID
+        self.display_name = RAG_ENGINE_NAME
         self.embedding_model = embedding_model
         self.rag_model = rag_model
         self.rag = rag
         
         if self.auth_mode == AuthMode.service_account.value:
-            credentials = service_account.Credentials.from_service_account_file(settings.gcp_sa_json_path)
+            credentials = service_account.Credentials.from_service_account_file(GCP_SA_JSON_PATH)
             vertexai.init(project=self.project_id, location=self.gcp_location, credentials=credentials)
         else:   
             vertexai.init(project=self.project_id, location=self.gcp_location)
@@ -138,5 +145,3 @@ class RAGService:
         response = await self.create_response(query=query, instruction=instruction)
         
         return response.text.strip()
-    
-rag_service = RAGService()

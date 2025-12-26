@@ -1,9 +1,7 @@
-import asyncio
 from google.cloud import bigquery
-from field_agent_app.core.config import settings
 from typing import Callable
-from field_agent_app.core.logging import logger
-from field_agent_app.core.tasks import app_clients
+from ragflow import logger
+from ragflow.utils import gcp_clients
 
 class DatabaseClient:
     def __init__(self):
@@ -12,7 +10,7 @@ class DatabaseClient:
     def connect_to_db(self):
         try:
             logger.info('Connecting to the Database Client')
-            self.db = app_clients.get_db_client()
+            self.db = gcp_clients.get_bq_client()
             logger.info('Connected to the Database Client')
         except Exception as e:
             logger.error('<---> Error Connecting to the Database Client <--->')
