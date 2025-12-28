@@ -1,10 +1,10 @@
 import asyncio
-from ragflow.services import storage_service
-from ragflow.models.main import ProcessorFolders
-from ragflow.services.documents import file_service
-from ragflow.db.database import database_client
-from ragflow.services.rag import rag_service
-from core.configs.ragflow import (
+from kennweb.ragflow.services import storage_service
+from kennweb.ragflow.models.main import ProcessorFolders
+from kennweb.ragflow.services.documents import file_service
+from kennweb.ragflow.db.database import database_client
+from kennweb.ragflow.services.rag import rag_service
+from kennweb.core.configs.ragflow import (
     GCP_PROJECT_ID, 
     BQ_DATASET_ID, 
     BQ_TABLE_ID, 

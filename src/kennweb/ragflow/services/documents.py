@@ -1,9 +1,9 @@
 import os
 from google.cloud import bigquery
 from google.cloud.exceptions import GoogleCloudError
-from ragflow.utils import gcp_clients
-from core.configs.ragflow import BQ_DATASET_ID, BQ_TABLE_ID
-from ragflow import logger
+from kennweb.ragflow.utils import gcp_clients
+from kennweb.core.configs.ragflow import BQ_DATASET_ID, BQ_TABLE_ID
+from kennweb.ragflow import logger
 
 class FileService:
     def __init__(self):

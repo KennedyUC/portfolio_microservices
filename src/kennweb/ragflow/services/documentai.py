@@ -1,7 +1,7 @@
 from google.cloud import documentai_v1beta3 as documentai
-from ragflow import logger
-from core.configs.ragflow import GCP_PROJECT_ID, DOCAI_PROCESSOR_NAME, DOCAI_PROCESSOR_TYPE
-from ragflow.utils import gcp_clients
+from kennweb.ragflow import logger
+from kennweb.core.configs.ragflow import GCP_PROJECT_ID, DOCAI_PROCESSOR_NAME, DOCAI_PROCESSOR_TYPE
+from kennweb.ragflow.utils import gcp_clients
 import uuid
 
 class DocumentAIService:

@@ -1,7 +1,7 @@
-from ragflow.db.base import BaseRepository
+from kennweb.ragflow.db.base import BaseRepository
 from google.cloud import bigquery
-from ragflow.models.main import FileMetadataRecord
-from core.configs.ragflow import (
+from kennweb.ragflow.models.main import FileMetadataRecord
+from kennweb.core.configs.ragflow import (
     GCP_PROJECT_ID, 
     BQ_DATASET_ID, 
     BQ_TABLE_ID, 

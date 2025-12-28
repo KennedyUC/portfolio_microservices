@@ -1,11 +1,11 @@
 import time
 import re
 from google.genai.types import GenerateContentConfig, Part
-from ragflow import logger
-from core.configs.ragflow import GEMINI_API_KEY, GEMINI_MODEL_NAME, GCP_PROJECT_ID, GCP_REGION
+from kennweb.ragflow import logger
+from kennweb.core.configs.ragflow import GEMINI_API_KEY, GEMINI_MODEL_NAME, GCP_PROJECT_ID, GCP_REGION
 from vertexai.generative_models import Part as VertexPart
 from vertexai.generative_models import Content
-from ragflow.utils import gcp_clients
+from kennweb.ragflow.utils import gcp_clients
 
 
 class GeminiService:

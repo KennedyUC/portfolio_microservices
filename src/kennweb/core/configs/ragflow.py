@@ -1,5 +1,5 @@
 from starlette.config import Config
-from core.configs.common import *
+from kennweb.core.configs.common import *
 
 config = Config(".env")
 

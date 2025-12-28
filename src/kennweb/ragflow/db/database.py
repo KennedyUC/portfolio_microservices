@@ -1,7 +1,7 @@
 from google.cloud import bigquery
 from typing import Callable
-from ragflow import logger
-from ragflow.utils import gcp_clients
+from kennweb.ragflow import logger
+from kennweb.ragflow.utils import gcp_clients
 
 class DatabaseClient:
     def __init__(self):

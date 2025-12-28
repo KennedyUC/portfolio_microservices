@@ -1,9 +1,9 @@
 import os
 import mimetypes
 import asyncio
-from core.configs.ragflow import GCP_STORAGE_BUCKET
-from ragflow import logger
-from ragflow.utils import gcp_clients
+from kennweb.core.configs.ragflow import GCP_STORAGE_BUCKET
+from kennweb.ragflow import logger
+from kennweb.ragflow.utils import gcp_clients
 from io import BytesIO
 from typing import List
 

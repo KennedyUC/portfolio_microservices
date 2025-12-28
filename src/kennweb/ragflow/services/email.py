@@ -5,10 +5,10 @@ import hashlib
 import mimetypes
 from email.header import decode_header
 from datetime import datetime, timezone
-from ragflow import logger
-from ragflow.services.storage import storage_processor
-from ragflow.models.main import ProcessorFolders
-from ragflow.db.repositories import PolicyRecordRepository
+from kennweb.ragflow import logger
+from kennweb.ragflow.services import storage_service
+from kennweb.ragflow.models.main import ProcessorFolders
+from kennweb.ragflow.db.repositories import PolicyRecordRepository
 
 class EmailService():
     def __init__(self, user: str, password: str):
@@ -105,7 +105,7 @@ class EmailService():
 
                 file_content = io.BytesIO(file_data)
 
-                storage_path = await storage_processor.upload_document(
+                storage_path = await storage_service.upload_document(
                     storage_folder=ProcessorFolders.audio.value, 
                     file_name=filename, 
                     file_content=file_content, 
