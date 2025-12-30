@@ -1,5 +1,5 @@
-from kennweb.ragflow.db.database import database_client
+from kennweb.ragflow.db import database_conn
 
 class BaseRepository():
     def __init__(self) -> None:
-        self.db = database_client.get_db()
+        self.db = database_conn

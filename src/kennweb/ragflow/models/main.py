@@ -25,11 +25,11 @@ class ChatRequest(BaseModel):
     query: str
 
 class FileMetadataRecord(BaseModel):
-    File_Name: str
-    File_Hash: str
-    Storage_Path: str
-    Upload_Time: datetime
-    Created_At: datetime = datetime.now(timezone.utc)
+    file_name: str
+    file_hash: str
+    storage_path: str
+    upload_time: datetime
+    created_at: datetime = datetime.now(timezone.utc)
 
 class FileNamesRequest(BaseModel):
     file_names: str

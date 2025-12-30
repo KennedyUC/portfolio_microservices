@@ -3,7 +3,7 @@ from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 from kennweb.ragflow import logger
 from kennweb.ragflow.api.routes.router import router as processor_router
-from kennweb.ragflow.db.database import database_client
+from kennweb.ragflow.db import database_conn
 from kennweb.core.configs.ragflow import (
     ALLOWED_ORIGINS, 
     APP_VERSION, 
@@ -31,8 +31,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.add_event_handler('startup', database_client.startup_event)
-app.add_event_handler('shutdown', database_client.shutdown_event)
+app.add_event_handler('startup', database_conn.startup_event)
+app.add_event_handler('shutdown', database_conn.shutdown_event)
 
 app.include_router(router=processor_router, tags=["Document Processor"])
 
