@@ -2,8 +2,8 @@ from logging.config import fileConfig
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 from alembic import context
-from kennweb.core.configs.ragflow import DATABASE_URL
-from kennweb.ragflow import logger
+from kennweb.core.configs.insuranceflow import DATABASE_URL
+from kennweb.insuranceflow import logger
 
 config = context.config
 

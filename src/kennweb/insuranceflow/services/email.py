@@ -5,10 +5,10 @@ import hashlib
 import mimetypes
 from email.header import decode_header
 from datetime import datetime, timezone
-from kennweb.ragflow import logger
-from kennweb.ragflow.services import storage_service
-from kennweb.ragflow.models.main import ProcessorFolders
-from kennweb.ragflow.db.repositories import PolicyRecordRepository
+from kennweb.insuranceflow import logger
+from kennweb.insuranceflow.services import storage_service
+from kennweb.insuranceflow.models.main import ProcessorFolders
+from kennweb.insuranceflow.db.repositories import PolicyRecordRepository
 
 class EmailService():
     def __init__(self, user: str, password: str):

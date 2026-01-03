@@ -4,7 +4,7 @@ from kennweb.core.configs.common import *
 config = Config(".env")
 
 APP_PORT                = config("APP_PORT", cast=int, default=9008)
-SERVER_PATH             = config("SERVER_PATH", cast=str, default="ragflow.api.server")
+SERVER_PATH             = config("SERVER_PATH", cast=str, default="insuranceflow.api.server")
 AUTH_MODE               = config("AUTH_MODE", cast=str, default="credential")
 GCP_PROJECT_ID          = config("GCP_PROJECT_ID", cast=str)
 GCP_REGION              = config("GCP_REGION", cast=str)

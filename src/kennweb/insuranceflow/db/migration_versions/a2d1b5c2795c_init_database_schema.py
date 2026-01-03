@@ -8,7 +8,7 @@ Create Date: 2025-12-29 22:38:28.258705
 from typing import Sequence, Union, Tuple
 from alembic import op
 import sqlalchemy as sa
-from kennweb.ragflow import logger
+from kennweb.insuranceflow import logger
 
 
 # revision identifiers, used by Alembic.

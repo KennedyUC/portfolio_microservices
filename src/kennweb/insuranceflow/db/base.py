@@ -1,4 +1,4 @@
-from kennweb.ragflow.db import database_conn
+from kennweb.insuranceflow.db import database_conn
 
 class BaseRepository():
     def __init__(self) -> None:

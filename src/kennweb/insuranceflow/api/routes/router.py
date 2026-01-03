@@ -8,22 +8,22 @@ from fastapi import status
 from fastapi.responses import RedirectResponse, JSONResponse
 from fastapi import APIRouter, HTTPException, Depends, UploadFile, File
 
-from kennweb.ragflow import logger
-from kennweb.ragflow.db.repositories import PolicyRecordRepository
-from kennweb.ragflow.models.main import (
+from kennweb.insuranceflow import logger
+from kennweb.insuranceflow.db.repositories import PolicyRecordRepository
+from kennweb.insuranceflow.models.main import (
     ProcessorFolders,
     DocumentProcessRequest,
     ChatRequest,
     FileMetadataRecord,
     FileNamesRequest,
 )
-from kennweb.ragflow.services import rag_service
-from kennweb.ragflow.services import email_service
-from kennweb.ragflow.services import gemini_service
-from kennweb.ragflow.services.chat import ConversationStore
-from kennweb.ragflow.services.prompts import PromptsTemplates
-from kennweb.ragflow.services import storage_service
-from kennweb.ragflow.services import documentai_service
+from kennweb.insuranceflow.services import rag_service
+from kennweb.insuranceflow.services import email_service
+from kennweb.insuranceflow.services import gemini_service
+from kennweb.insuranceflow.services.chat import ConversationStore
+from kennweb.insuranceflow.services.prompts import PromptsTemplates
+from kennweb.insuranceflow.services import storage_service
+from kennweb.insuranceflow.services import documentai_service
 
 router = APIRouter()
 

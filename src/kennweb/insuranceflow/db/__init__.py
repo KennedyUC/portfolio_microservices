@@ -1,7 +1,7 @@
 from kennweb.core.db_tasks import DatabaseConnTasks
-from kennweb.core.configs.ragflow import DATABASE_URL
+from kennweb.core.configs.insuranceflow import DATABASE_URL
 
 database_conn = DatabaseConnTasks(
-    service_name="ragflow",
+    service_name="insuranceflow",
     db_url=DATABASE_URL
 )

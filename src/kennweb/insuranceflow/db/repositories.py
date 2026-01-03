@@ -1,5 +1,5 @@
-from kennweb.ragflow.db.base import BaseRepository
-from kennweb.ragflow.models.main import FileMetadataRecord
+from kennweb.insuranceflow.db.base import BaseRepository
+from kennweb.insuranceflow.models.main import FileMetadataRecord
 
 
 GET_POLICY_BY_CUSTOMER_QUERY = f"""

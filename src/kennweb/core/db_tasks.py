@@ -1,5 +1,5 @@
 from typing import Callable, Union, Dict, List, Any
-from kennweb.ragflow import logger
+from kennweb.insuranceflow import logger
 from databases import Database
 from databases import DatabaseURL
 

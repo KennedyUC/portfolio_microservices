@@ -1,10 +1,10 @@
 import uvicorn
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
-from kennweb.ragflow import logger
-from kennweb.ragflow.api.routes.router import router as processor_router
-from kennweb.ragflow.db import database_conn
-from kennweb.core.configs.ragflow import (
+from kennweb.insuranceflow import logger
+from kennweb.insuranceflow.api.routes.router import router as processor_router
+from kennweb.insuranceflow.db import database_conn
+from kennweb.core.configs.insuranceflow import (
     ALLOWED_ORIGINS, 
     APP_VERSION, 
     PROJECT_TITLE, 

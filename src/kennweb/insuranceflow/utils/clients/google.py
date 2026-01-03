@@ -4,10 +4,10 @@ from google.cloud.bigquery import Client as BQClient
 from google.genai import Client as GenAIClient
 from vertexai import init as vertexai_init
 from vertexai.preview.generative_models import GenerativeModel as VertexGenerativeModel
-from kennweb.ragflow import logger
-from kennweb.ragflow.models.main import AuthMode
+from kennweb.insuranceflow import logger
+from kennweb.insuranceflow.models.main import AuthMode
 from google.auth import default
-from kennweb.core.configs.ragflow import GCP_SA_JSON_PATH, GEMINI_API_KEY, GCP_PROJECT_ID, GCP_REGION
+from kennweb.core.configs.insuranceflow import GCP_SA_JSON_PATH, GEMINI_API_KEY, GCP_PROJECT_ID, GCP_REGION
 
 class GCPClients():
     def __init__(self, auth_mode: AuthMode) -> None:

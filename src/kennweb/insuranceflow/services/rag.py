@@ -3,10 +3,10 @@ from vertexai.generative_models import GenerativeModel, Tool, Part
 import vertexai
 from typing import Optional
 from google.oauth2 import service_account
-from kennweb.ragflow.models.main import AuthMode
-from kennweb.ragflow.services.prompts import PromptsTemplates
-from kennweb.ragflow import logger
-from kennweb.core.configs.ragflow import (
+from kennweb.insuranceflow.models.main import AuthMode
+from kennweb.insuranceflow.services.prompts import PromptsTemplates
+from kennweb.insuranceflow import logger
+from kennweb.core.configs.insuranceflow import (
     AUTH_MODE, 
     GCP_REGION, 
     GCP_PROJECT_ID, 
